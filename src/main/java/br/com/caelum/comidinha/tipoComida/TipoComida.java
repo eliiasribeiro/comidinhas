@@ -1,14 +1,12 @@
 package br.com.caelum.comidinha.tipoComida;
 
-import org.springframework.util.StringUtils;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class TipoComida {
+class TipoComida {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @NotEmpty
@@ -20,12 +18,12 @@ public class TipoComida {
     public TipoComida() {
     }
 
-    public TipoComida(Long id, @NotEmpty @Size(max = 50) String nome) {
+    TipoComida(Long id, @NotEmpty @Size(max = 50) String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public TipoComida(String nome) {
+    TipoComida(String nome) {
         this.nome = nome;
     }
 
@@ -37,7 +35,7 @@ public class TipoComida {
         return id;
     }
 
-    public TipoComida convertFormToEntity(Long id,TipoComidaForm form){
-        return new TipoComida(id,form.getNome());
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

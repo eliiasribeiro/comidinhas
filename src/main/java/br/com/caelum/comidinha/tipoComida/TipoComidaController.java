@@ -27,22 +27,21 @@ class TipoComidaController {
     }
 
     @PostMapping("/admin/tipo-de-comida/novo")
-    ResponseEntity<?> criarUmNovoTipoDeComida(@RequestBody @Valid TipoComidaForm tipoComidaForm){
+    ResponseEntity<?> criarUmNovoTipoDeComida(@RequestBody @Valid TipoComidaFormNovo tipoComidaFormNovo){
         //TODO VERIFICAR SE O CARA E ADMIN
-        if(tipoComidaRepository.findByNome(tipoComidaForm.getNome())){
+        if(tipoComidaRepository.findByNome(tipoComidaFormNovo.getNome())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Tipo de comida ja existe");
         }
 
-        tipoComidaRepository.save(tipoComidaForm.toModel());
+        tipoComidaRepository.save(tipoComidaFormNovo.toModel());
         URI location = URI.create("/admin/tipo-de-comidas");
         return created(location).build();
     }
 
-    @PutMapping("/admin/tipo-de-comida/editar/{id}")
-    ResponseEntity<?> criarUmNovoTipoDeComida(@PathVariable("id") Long id, @Valid @RequestBody TipoComidaForm tipoComidaForm){
+    @PutMapping("/admin/tipo-de-comida/editar")
+    ResponseEntity<?> criarUmNovoTipoDeComida(@Valid @RequestBody TipoComidaFormEditar tipoComidaFormEditar){
         //TODO VERIFICAR SE O CARA E ADMIN
-        TipoComida tipoComida = tipoComidaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        tipoComidaRepository.save(tipoComida.convertFormToEntity(id, tipoComidaForm));
+        tipoComidaRepository.save(tipoComidaFormEditar.toModel(tipoComidaRepository));
         URI location = URI.create("/admin/tipo-de-comidas");
         return created(location).build();
     }
