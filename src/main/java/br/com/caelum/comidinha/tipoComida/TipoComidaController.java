@@ -46,11 +46,11 @@ class TipoComidaController {
     }
 
     @PutMapping("/admin/tipo-de-comida/editar")
-    ResponseEntity<?> criarUmNovoTipoDeComida(@Valid @RequestBody TipoComidaFormEditar tipoComidaFormEditar){
+    ResponseEntity<?> editaUmNovoTipoDeComida(@Valid @RequestBody TipoComidaFormEditar tipoComidaFormEditar){
         //TODO VERIFICAR SE O CARA E ADMIN
         tipoComidaRepository.save(tipoComidaFormEditar.toModel(tipoComidaRepository));
         URI location = URI.create("/admin/tipo-de-comidas");
-        return created(location).build();
+        return ok(location);
     }
 
     @DeleteMapping("/admin/tipo-de-comida/remover/{id}")

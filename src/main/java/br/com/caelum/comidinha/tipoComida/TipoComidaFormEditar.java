@@ -15,9 +15,8 @@ class TipoComidaFormEditar {
     @Size(max = 50)
     private String nome;
 
-    public Long getId() {
-        return id;
-    }
+    @Deprecated
+    TipoComidaFormEditar(){}
 
     public String getNome() {
         return nome;

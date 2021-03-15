@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/comidinha?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
     username: root
@@ -7,3 +9,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+---
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:postgresql://localhost:15432/comidinha_test?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop

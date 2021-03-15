@@ -8,12 +8,14 @@ class TipoComidaFormNovo {
     @Size(max = 50)
     private String nome;
 
+    @Deprecated
+    TipoComidaFormNovo(){}
 
     TipoComidaFormNovo(@NotEmpty @Size(max = 50) String nome) {
         this.nome = nome;
     }
 
-    String getNome() {
+    public String getNome() {
         return nome;
     }
 

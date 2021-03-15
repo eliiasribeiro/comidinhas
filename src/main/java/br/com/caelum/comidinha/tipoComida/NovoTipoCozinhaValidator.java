@@ -19,7 +19,7 @@ public class NovoTipoCozinhaValidator implements Validator {
     public void validate(Object o, Errors errors) {
         TipoComidaFormNovo tipoComidaFormNovo = (TipoComidaFormNovo) o;
         if (tipoComidaRepository.existsByNome(tipoComidaFormNovo.getNome())){
-            errors.rejectValue("nome","bla","bla");
+            errors.rejectValue("nome","tipo.comida.novo.exists");
         }
     }
 }
