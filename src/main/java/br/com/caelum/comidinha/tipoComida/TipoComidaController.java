@@ -1,6 +1,7 @@
 package br.com.caelum.comidinha.tipoComida;
 
 import org.springframework.http.*;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,6 +20,16 @@ class TipoComidaController {
         this.tipoComidaRepository = tipoComidaRepository;
     }
 
+    @InitBinder("tipoComidaFormNovo")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(new NovoTipoCozinhaValidator(tipoComidaRepository));
+    }
+
+    @InitBinder("tipoComidaFormEditar")
+    void initBinderEditaCozinha(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(new EditarTipoCozinhaValidator(tipoComidaRepository));
+    }
+
     @GetMapping("/admin/tipo-de-comidas")
     ResponseEntity<List<TipoComida>> todosOsTiposDeComida(){
         //TODO VERIFICAR SE O CARA E ADMIN
@@ -29,10 +40,6 @@ class TipoComidaController {
     @PostMapping("/admin/tipo-de-comida/novo")
     ResponseEntity<?> criarUmNovoTipoDeComida(@RequestBody @Valid TipoComidaFormNovo tipoComidaFormNovo){
         //TODO VERIFICAR SE O CARA E ADMIN
-        if(tipoComidaRepository.findByNome(tipoComidaFormNovo.getNome())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Tipo de comida ja existe");
-        }
-
         tipoComidaRepository.save(tipoComidaFormNovo.toModel());
         URI location = URI.create("/admin/tipo-de-comidas");
         return created(location).build();

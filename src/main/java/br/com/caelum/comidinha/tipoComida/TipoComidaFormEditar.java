@@ -15,11 +15,17 @@ class TipoComidaFormEditar {
     @Size(max = 50)
     private String nome;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
     TipoComida toModel(TipoComidaRepository tipoDeCozinhaRepository) {
         TipoComida tipoDeCozinha = tipoDeCozinhaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         tipoDeCozinha.setNome(nome);
         return tipoDeCozinha;
     }
-
-
 }
