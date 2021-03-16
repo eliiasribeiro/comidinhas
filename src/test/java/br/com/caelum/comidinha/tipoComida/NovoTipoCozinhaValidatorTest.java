@@ -22,7 +22,7 @@ class NovoTipoCozinhaValidatorTest {
 
 
     @Test
-    void bla(){
+    void deve_retornar_verdadeiro_quando_o_nome_existe_e_mostrar_msg_de_erro(){
         when(tipoComidaFormNovo.getNome()).thenReturn("Brasileira");
         when(tipoComidaRepository.existsByNome("Brasileira")).thenReturn(true);
         novoTipoCozinhaValidator.validate(tipoComidaFormNovo, errors);
@@ -30,7 +30,7 @@ class NovoTipoCozinhaValidatorTest {
     }
 
     @Test
-    void bla2(){
+    void deve_retornar_falso_quando_o_nome_nao_existe_e_nao_mostrar_msg_de_erro(){
         when(tipoComidaFormNovo.getNome()).thenReturn("Italiana");
         when(tipoComidaRepository.existsByNome("Italiana")).thenReturn(false);
         novoTipoCozinhaValidator.validate(tipoComidaFormNovo, errors);
