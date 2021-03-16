@@ -7,12 +7,11 @@ import javax.validation.constraints.*;
 
 class TipoComidaFormEditar {
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "{tipo.comida.id.not.null}")
     private Long id;
 
     @NotEmpty
-    @Size(max = 50)
+    @Size(max = 50,message = "{tipo.comida.nome.size}")
     private String nome;
 
     @Deprecated

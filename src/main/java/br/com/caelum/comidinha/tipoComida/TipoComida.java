@@ -10,9 +10,8 @@ class TipoComida {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @NotEmpty
-    @Size(max = 50)
+    @Size(max = 50, message = "{tipo.comida.nome.size}")
     private String nome;
-
 
     @Deprecated
     public TipoComida() {
@@ -25,10 +24,6 @@ class TipoComida {
 
     TipoComida(String nome) {
         this.nome = nome;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public Long getId() {

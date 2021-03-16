@@ -5,7 +5,7 @@ import javax.validation.constraints.*;
 class TipoComidaFormNovo {
 
     @NotEmpty
-    @Size(max = 50)
+    @Size(max = 50,message = "{tipo.comida.nome.size}")
     private String nome;
 
     @Deprecated

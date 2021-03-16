@@ -7,7 +7,5 @@ import java.util.List;
 interface TipoComidaRepository extends JpaRepository<TipoComida,Long> {
     List<TipoComida> findAllByOrderByNome();
 
-    boolean findByNome(String nome);
-
     boolean existsByNome(String nome);
 }

@@ -3,7 +3,6 @@ package br.com.caelum.comidinha.tipoComida;
 import org.junit.jupiter.api.*;
 import org.springframework.validation.Errors;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class EditarTipoCozinhaValidatorTest {
