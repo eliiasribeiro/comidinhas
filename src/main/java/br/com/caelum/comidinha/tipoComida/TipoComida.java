@@ -26,6 +26,10 @@ class TipoComida {
         this.nome = nome;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public Long getId() {
         return id;
     }

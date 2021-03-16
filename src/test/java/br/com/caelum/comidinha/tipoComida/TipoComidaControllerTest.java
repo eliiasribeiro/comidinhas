@@ -14,7 +14,7 @@ import java.util.*;
 
 import static br.com.caelum.comidinha.tipoComida.TipoComidaBuilder.*;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -42,8 +42,8 @@ class TipoComidaControllerTest {
 
         mockMvc.perform(get("/admin/tipo-de-comidas"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0]nome", is("Brasileira")))
-                .andExpect(jsonPath("$.[0]id", is(1)))
+                .andExpect(jsonPath("$[0].nome", is("Brasileira")))
+                .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
@@ -71,8 +71,9 @@ class TipoComidaControllerTest {
     @Test
     @DisplayName("POST /admin/tipo-de-comida/novo")
     void deve_retornar_a_mensagem_de_erro_quando_ja_existe_o_nome() throws Exception {
-        tipoComidaRepository.save(umTipoComida().comNome("Italiana").cria());
+        when(tipoComidaRepository.existsByNome(anyString())).thenReturn(true);
         String formJson = umTipoComida().comNome("Italiana").comoJson();
+
         mockMvc.perform(post("/admin/tipo-de-comida/novo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(formJson))
@@ -82,8 +83,9 @@ class TipoComidaControllerTest {
     @Test
     @DisplayName("PUT /admin/tipo-de-comida/editar")
     void deve_editar_o_nome_do_tipo_de_comida() throws Exception{
-        tipoComidaRepository.save(umTipoComida().comId(1L).comNome("Italiana").cria());
-        String formJson = umTipoComida().comId(1L).comNome("Italiana").comoJson();
+        TipoComida italiana = umTipoComida().comId(1L).comNome("Italiana").cria();
+        when(tipoComidaRepository.findById(anyLong())).thenReturn(Optional.of(italiana));
+        String formJson = umTipoComida().comId(1L).comNome("Portuguesa").comoJson();
         mockMvc.perform(put("/admin/tipo-de-comida/editar")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(formJson))
@@ -105,8 +107,9 @@ class TipoComidaControllerTest {
     @Test
     @DisplayName("DELETE /admin/tipo-de-comida/remover")
     void deve_remover_um_tipo_de_comida() throws Exception{
-        tipoComidaRepository.save(umTipoComida().comId(1L).comNome("Italiana").cria());
-        mockMvc.perform(delete("/admin/tipo-de-comida/remover/1")
+        TipoComida tipoComida = umTipoComida().comId(1L).comNome("Italiana").cria();
+        when(tipoComidaRepository.findById(tipoComida.getId())).thenReturn(Optional.of(tipoComida));
+        mockMvc.perform(delete("/admin/tipo-de-comida/remover/{id}","1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

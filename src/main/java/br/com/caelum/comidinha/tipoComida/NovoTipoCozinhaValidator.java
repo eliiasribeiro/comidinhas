@@ -2,11 +2,11 @@ package br.com.caelum.comidinha.tipoComida;
 
 import org.springframework.validation.*;
 
-public class NovoTipoCozinhaValidator implements Validator {
+class NovoTipoCozinhaValidator implements Validator {
 
-    private TipoComidaRepository tipoComidaRepository;
+    TipoComidaRepository tipoComidaRepository;
 
-    public NovoTipoCozinhaValidator(TipoComidaRepository tipoComidaRepository) {
+    NovoTipoCozinhaValidator(TipoComidaRepository tipoComidaRepository) {
         this.tipoComidaRepository = tipoComidaRepository;
     }
 

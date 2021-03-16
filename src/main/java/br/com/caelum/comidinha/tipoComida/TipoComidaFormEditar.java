@@ -26,4 +26,8 @@ class TipoComidaFormEditar {
         tipoDeCozinha.setNome(nome);
         return tipoDeCozinha;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
