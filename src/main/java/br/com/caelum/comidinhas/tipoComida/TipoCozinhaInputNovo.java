@@ -1,17 +1,17 @@
-package br.com.caelum.comidinha.tipoComida;
+package br.com.caelum.comidinhas.tipoComida;
 
 import javax.validation.constraints.*;
 
-class TipoComidaFormNovo {
+class TipoCozinhaInputNovo {
 
     @NotEmpty
     @Size(max = 50,message = "{tipo.comida.nome.size}")
     private String nome;
 
     @Deprecated
-    TipoComidaFormNovo(){}
+    TipoCozinhaInputNovo(){}
 
-    TipoComidaFormNovo(@NotEmpty @Size(max = 50) String nome) {
+    TipoCozinhaInputNovo(@NotEmpty @Size(max = 50) String nome) {
         this.nome = nome;
     }
 
@@ -19,7 +19,7 @@ class TipoComidaFormNovo {
         return nome;
     }
 
-    TipoComida toModel() {
-        return new TipoComida(this.getNome());
+    TipoCozinha toModel() {
+        return new TipoCozinha(this.getNome());
     }
 }

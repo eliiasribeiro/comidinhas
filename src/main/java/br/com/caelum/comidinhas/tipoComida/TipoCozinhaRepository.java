@@ -1,0 +1,11 @@
+package br.com.caelum.comidinhas.tipoComida;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+interface TipoCozinhaRepository extends JpaRepository<TipoCozinha,Long> {
+    List<TipoCozinha> findAllByOrderByNome();
+
+    boolean existsByNome(String nome);
+}

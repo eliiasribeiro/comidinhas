@@ -1,4 +1,4 @@
-package br.com.caelum.comidinha;
+package br.com.caelum.comidinhas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package br.com.caelum.comidinha.tipoComida;
+package br.com.caelum.comidinhas.tipoComida;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,8 +27,8 @@ public class TipoComidaBuilder implements Serializable {
         return new TipoComidaBuilder();
     }
 
-    public TipoComida cria() {
-        return new TipoComida(this.id,this.nome);
+    public TipoCozinha cria() {
+        return new TipoCozinha(this.id,this.nome);
     }
 
     public String comoJson() {

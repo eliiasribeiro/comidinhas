@@ -1,4 +1,4 @@
-package br.com.caelum.comidinha.tipoComida;
+package br.com.caelum.comidinhas.tipoComida;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class TipoComida {
+class TipoCozinha {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @NotEmpty
@@ -14,15 +14,15 @@ class TipoComida {
     private String nome;
 
     @Deprecated
-    public TipoComida() {
+    public TipoCozinha() {
     }
 
-    TipoComida(Long id, @NotEmpty @Size(max = 50) String nome) {
+    TipoCozinha(Long id, @NotEmpty @Size(max = 50) String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    TipoComida(String nome) {
+    TipoCozinha(String nome) {
         this.nome = nome;
     }
 
@@ -34,7 +34,4 @@ class TipoComida {
         return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }

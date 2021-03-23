@@ -1,4 +1,4 @@
-package br.com.caelum.comidinha.handler.validation;
+package br.com.caelum.comidinhas.handler.validation;
 
 public class FieldErrorOutputDto {
 
