@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/comidinha?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
+    url: jdbc:postgresql://localhost:5432/comidinhas?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
     username: root
     password: root
   jpa:
@@ -14,7 +14,7 @@ spring:
 spring:
   profiles: test
   datasource:
-    url: jdbc:postgresql://localhost:15432/comidinha_test?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
+    url: jdbc:postgresql://localhost:15432/comidinhas_test?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
     username: root
     password: root
   jpa:
