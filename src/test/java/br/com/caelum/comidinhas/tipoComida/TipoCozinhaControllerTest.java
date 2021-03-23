@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.*;
 
-import static br.com.caelum.comidinhas.tipoComida.TipoComidaBuilder.*;
+import static br.com.caelum.comidinhas.tipoComida.TipoCozinhaBuilder.*;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

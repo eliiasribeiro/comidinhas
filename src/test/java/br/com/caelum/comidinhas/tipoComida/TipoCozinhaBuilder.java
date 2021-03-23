@@ -6,25 +6,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.Serializable;
 
-public class TipoComidaBuilder implements Serializable {
+public class TipoCozinhaBuilder implements Serializable {
 
     @JsonProperty
     private Long id;
     @JsonProperty
     private String nome;
 
-    public TipoComidaBuilder comNome(String nome) {
+    public TipoCozinhaBuilder comNome(String nome) {
         this.nome = nome;
         return this;
     }
 
-    public TipoComidaBuilder comId(Long id) {
+    public TipoCozinhaBuilder comId(Long id) {
         this.id = id;
         return this;
     }
 
-    public static TipoComidaBuilder umTipoComida() {
-        return new TipoComidaBuilder();
+    public static TipoCozinhaBuilder umTipoComida() {
+        return new TipoCozinhaBuilder();
     }
 
     public TipoCozinha cria() {
