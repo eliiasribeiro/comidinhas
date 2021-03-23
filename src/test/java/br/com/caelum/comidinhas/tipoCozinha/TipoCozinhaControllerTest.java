@@ -1,5 +1,6 @@
 package br.com.caelum.comidinhas.tipoCozinha;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,16 +105,19 @@ class TipoCozinhaControllerTest {
         mockMvc.perform(put("/admin/tipos-de-cozinha/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.globalErrorMessages", Matchers.hasItem("O tipo de cozinha Chinesa informado nao existe")));
+        verify(tipoCozinhaRepository,never()).save(any(TipoCozinha.class));
     }
 
     @Test
-    void deve_remover_um_tipo_de_cozinhaa() throws Exception{
+    void deve_remover_um_tipo_de_cozinha() throws Exception{
         TipoCozinha italiana = new TipoCozinha(1L, "Italiana");
         when(tipoCozinhaRepository.findById(italiana.getId())).thenReturn(Optional.of(italiana));
         mockMvc.perform(delete("/admin/tipos-de-cozinha/{id}","1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+        verify(tipoCozinhaRepository,times(1)).deleteById(1L);
     }
 
 }
