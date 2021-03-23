@@ -34,6 +34,25 @@ public class ValidationErrorHandler {
         return validationErrors;
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ValidationErrorsOutputDto handleValidationnError(MethodArgumentNotValidException exception) {
+
+        List<ObjectError> globalErrors = exception.getGlobalErrors();
+        List<FieldError> fieldErrors = exception.getFieldErrors();
+
+        ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
+
+        globalErrors.forEach(error -> validationErrors.addError(getErrorMessage(error)));
+
+        fieldErrors.forEach(error -> {
+            String errorMessage = getErrorMessage(error);
+            validationErrors.addFieldError(error.getField(), errorMessage);
+        });
+
+        return validationErrors;
+    }
+
     private String getErrorMessage(ObjectError error) {
         return messageSource.getMessage(error, LocaleContextHolder.getLocale());
     }

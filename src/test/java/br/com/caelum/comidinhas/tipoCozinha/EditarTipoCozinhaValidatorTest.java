@@ -1,4 +1,4 @@
-package br.com.caelum.comidinhas.tipoComida;
+package br.com.caelum.comidinhas.tipoCozinha;
 
 import org.junit.jupiter.api.*;
 import org.springframework.validation.Errors;
@@ -26,7 +26,7 @@ class EditarTipoCozinhaValidatorTest {
         when(tipoCozinhaInputEditar.getNome()).thenReturn("Brasileira");
         when(tipoCozinhaRepository.existsByNome("Brasileira")).thenReturn(true);
         editarTipoCozinhaValidator.validate(tipoCozinhaInputEditar, errors);
-        verify(errors, times(1)).rejectValue("nome", "tipo.comida.editar.exists");
+        verify(errors, times(1)).rejectValue("nome", "tipo.cozinha.editar.exists");
     }
 
     @Test
@@ -34,7 +34,7 @@ class EditarTipoCozinhaValidatorTest {
         when(tipoCozinhaInputEditar.getNome()).thenReturn("Italiana");
         when(tipoCozinhaRepository.existsByNome("Italiana")).thenReturn(false);
         editarTipoCozinhaValidator.validate(tipoCozinhaInputEditar, errors);
-        verify(errors, never()).rejectValue("nome", "tipo.comida.editar.exists");
+        verify(errors, never()).rejectValue("nome", "tipo.cozinha.editar.exists");
     }
 
 }

@@ -1,4 +1,4 @@
-package br.com.caelum.comidinhas.tipoComida;
+package br.com.caelum.comidinhas.tipoCozinha;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

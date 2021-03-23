@@ -1,4 +1,4 @@
-package br.com.caelum.comidinhas.tipoComida;
+package br.com.caelum.comidinhas.tipoCozinha;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -10,7 +10,7 @@ class TipoCozinha {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @NotEmpty
-    @Size(max = 50, message = "{tipo.comida.nome.size}")
+    @Size(max = 50, message = "{tipo.cozinha.nome.size}")
     private String nome;
 
     @Deprecated

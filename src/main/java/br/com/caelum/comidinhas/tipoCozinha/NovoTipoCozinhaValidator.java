@@ -1,4 +1,4 @@
-package br.com.caelum.comidinhas.tipoComida;
+package br.com.caelum.comidinhas.tipoCozinha;
 
 import org.springframework.validation.*;
 
@@ -19,7 +19,7 @@ class NovoTipoCozinhaValidator implements Validator {
     public void validate(Object o, Errors errors) {
         TipoCozinhaInputNovo tipoCozinhaInputNovo = (TipoCozinhaInputNovo) o;
         if (tipoCozinhaRepository.existsByNome(tipoCozinhaInputNovo.getNome())){
-            errors.rejectValue("nome","tipo.comida.novo.exists");
+            errors.rejectValue("nome","tipo.cozinha.novo.exists");
         }
     }
 }
