@@ -26,7 +26,7 @@ class EditarTipoCozinhaValidatorTest {
         when(tipoCozinhaInputEditar.getNome()).thenReturn("Brasileira");
         when(tipoCozinhaRepository.existsByNome("Brasileira")).thenReturn(true);
         editarTipoCozinhaValidator.validate(tipoCozinhaInputEditar, errors);
-        verify(errors, times(1)).rejectValue("nome", "tipo.cozinha.editar.exists");
+        verify(errors).rejectValue("nome", "tipo.cozinha.editar.exists");
     }
 
     @Test

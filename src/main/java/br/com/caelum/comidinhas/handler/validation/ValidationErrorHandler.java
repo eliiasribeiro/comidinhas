@@ -34,7 +34,7 @@ public class ValidationErrorHandler {
         return validationErrors;
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public ValidationErrorsOutputDto handleValidationnErrorIllegalArgument(IllegalArgumentException exception) {
         ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();

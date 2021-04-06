@@ -26,7 +26,7 @@ class NovoTipoCozinhaValidatorTest {
         when(tipoCozinhaInputNovo.getNome()).thenReturn("Brasileira");
         when(tipoCozinhaRepository.existsByNome("Brasileira")).thenReturn(true);
         novoTipoCozinhaValidator.validate(tipoCozinhaInputNovo, errors);
-        verify(errors, times(1)).rejectValue("nome", "tipo.cozinha.novo.exists");
+        verify(errors).rejectValue("nome", "tipo.cozinha.novo.exists");
     }
 
     @Test

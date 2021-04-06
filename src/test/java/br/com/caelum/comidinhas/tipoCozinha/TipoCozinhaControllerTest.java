@@ -4,7 +4,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -20,9 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(TipoCozinhaController.class)
 class TipoCozinhaControllerTest {
 
     @MockBean
@@ -67,7 +65,7 @@ class TipoCozinhaControllerTest {
                 .content(json))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location","/admin/tipos-de-cozinha/1"));
-        verify(tipoCozinhaRepository,times(1)).save(any(TipoCozinha.class));
+        verify(tipoCozinhaRepository).save(any(TipoCozinha.class));
     }
 
     @Test
@@ -92,7 +90,7 @@ class TipoCozinhaControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk());
-        verify(tipoCozinhaRepository,times(1)).save(any(TipoCozinha.class));
+        verify(tipoCozinhaRepository).save(any(TipoCozinha.class));
     }
 
 
@@ -105,7 +103,7 @@ class TipoCozinhaControllerTest {
         mockMvc.perform(put("/admin/tipos-de-cozinha/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.globalErrorMessages", Matchers.hasItem("O tipo de cozinha Chinesa informado nao existe")));
         verify(tipoCozinhaRepository,never()).save(any(TipoCozinha.class));
     }
@@ -117,7 +115,7 @@ class TipoCozinhaControllerTest {
         mockMvc.perform(delete("/admin/tipos-de-cozinha/{id}","1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(tipoCozinhaRepository,times(1)).deleteById(1L);
+        verify(tipoCozinhaRepository).deleteById(1L);
     }
 
 }

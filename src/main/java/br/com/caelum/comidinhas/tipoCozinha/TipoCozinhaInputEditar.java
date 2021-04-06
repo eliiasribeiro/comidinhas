@@ -33,6 +33,8 @@ class TipoCozinhaInputEditar {
         this.nome = nome;
     }
 
+    ///MUDAR EXCESSAO
+
     TipoCozinha toModel(Function<Long, Optional<TipoCozinha>> possivelTipoCozinha) {
         if(!isNull(possivelTipoCozinha)){
             var tipoCozinha = possivelTipoCozinha
