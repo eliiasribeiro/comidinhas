@@ -1,5 +1,8 @@
 package br.com.caelum.comidinhas.tipoCozinha;
 
+import br.com.caelum.comidinhas.exception.FunctionNotFound;
+import org.springframework.util.Assert;
+
 import javax.validation.constraints.*;
 import java.util.Optional;
 import java.util.function.Function;
@@ -36,16 +39,12 @@ class TipoCozinhaInputEditar {
     ///MUDAR EXCESSAO
 
     TipoCozinha toModel(Function<Long, Optional<TipoCozinha>> possivelTipoCozinha) {
-        if(!isNull(possivelTipoCozinha)){
-            var tipoCozinha = possivelTipoCozinha
-                    .apply(id)
-                    .orElseThrow(
-                            () -> new IllegalArgumentException(format("O tipo de cozinha %s informado nao existe", nome)));
+        Assert.notNull(possivelTipoCozinha, "Função não deveria ser nula");
+        var tipoCozinha = possivelTipoCozinha
+                .apply(id)
+                .orElseThrow(
+                        () -> new FunctionNotFound(format("O tipo de cozinha %s informado nao existe", nome)));
 
-            return new TipoCozinha(tipoCozinha.getId(),nome);
-        }
-        return new TipoCozinha(nome);
+        return new TipoCozinha(tipoCozinha.getId(),nome);
     }
-
-
 }

@@ -1,5 +1,6 @@
 package br.com.caelum.comidinhas.handler.validation;
 
+import br.com.caelum.comidinhas.exception.FunctionNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -35,8 +36,8 @@ public class ValidationErrorHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ValidationErrorsOutputDto handleValidationnErrorIllegalArgument(IllegalArgumentException exception) {
+    @ExceptionHandler(FunctionNotFound.class)
+    public ValidationErrorsOutputDto handleValidationnErrorIllegalArgument(FunctionNotFound exception) {
         ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
         validationErrors.addError(exception.getMessage());
         return validationErrors;
