@@ -1,6 +1,6 @@
 package br.com.caelum.comidinhas.tipoCozinha;
 
-import br.com.caelum.comidinhas.exception.FunctionNotFound;
+import br.com.caelum.comidinhas.exception.TipoDeComidaNotFound;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.*;
@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static java.lang.String.format;
-import static java.util.Objects.isNull;
 
 
 class TipoCozinhaInputEditar {
@@ -43,7 +42,7 @@ class TipoCozinhaInputEditar {
         var tipoCozinha = possivelTipoCozinha
                 .apply(id)
                 .orElseThrow(
-                        () -> new FunctionNotFound(format("O tipo de cozinha %s informado nao existe", nome)));
+                        () -> new TipoDeComidaNotFound(format("O tipo de cozinha %s informado nao existe", nome)));
 
         return new TipoCozinha(tipoCozinha.getId(),nome);
     }
