@@ -1,6 +1,6 @@
 package br.com.caelum.comidinhas.tipoCozinha;
 
-import br.com.caelum.comidinhas.exception.TipoDeComidaNotFound;
+import br.com.caelum.comidinhas.exception.RelationshipNotFoundException;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.*;
@@ -42,7 +42,7 @@ class TipoCozinhaInputEditar {
         var tipoCozinha = possivelTipoCozinha
                 .apply(id)
                 .orElseThrow(
-                        () -> new TipoDeComidaNotFound(format("O tipo de cozinha %s informado nao existe", nome)));
+                        () -> new RelationshipNotFoundException(format("O tipo de cozinha %s informado nao existe", nome)));
 
         return new TipoCozinha(tipoCozinha.getId(),nome);
     }

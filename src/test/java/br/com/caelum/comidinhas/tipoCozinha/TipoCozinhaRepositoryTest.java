@@ -1,7 +1,6 @@
 package br.com.caelum.comidinhas.tipoCozinha;
 
 
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.*;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 
 
 @ExtendWith(SpringExtension.class)
@@ -33,7 +32,6 @@ class TipoCozinhaRepositoryTest {
 
     @Test
     void deve_retornar_falso_quando_nos_nao_temos_um_tipo_de_cozinha(){
-        tipoCozinhaRepository.save(new TipoCozinha("Portuguesa"));
         assertFalse(tipoCozinhaRepository.existsByNome("Brasileira"));
     }
 
@@ -43,7 +41,7 @@ class TipoCozinhaRepositoryTest {
         TipoCozinha portuguesa = tipoCozinhaRepository.save(new TipoCozinha("Portuguesa"));
         TipoCozinha arabe = tipoCozinhaRepository.save(new TipoCozinha("Arabe"));
         List<TipoCozinha> tipoDeCozinhas = tipoCozinhaRepository.findAllByOrderByNome();
-        MatcherAssert.assertThat(tipoDeCozinhas, contains(arabe,italiana,portuguesa));
+        assertThat(tipoDeCozinhas).contains(arabe,italiana,portuguesa);
 
     }
 }
