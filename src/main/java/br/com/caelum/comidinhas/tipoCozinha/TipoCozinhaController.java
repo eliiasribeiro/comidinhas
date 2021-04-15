@@ -15,7 +15,7 @@ import static org.springframework.http.ResponseEntity.*;
 @RestController
 class TipoCozinhaController {
 
-    final TipoCozinhaRepository tipoCozinhaRepository;
+    private final TipoCozinhaRepository tipoCozinhaRepository;
 
     TipoCozinhaController(TipoCozinhaRepository tipoCozinhaRepository) {
         this.tipoCozinhaRepository = tipoCozinhaRepository;

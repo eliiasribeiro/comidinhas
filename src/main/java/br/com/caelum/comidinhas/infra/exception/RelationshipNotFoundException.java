@@ -1,11 +1,6 @@
-package br.com.caelum.comidinhas.exception;
+package br.com.caelum.comidinhas.infra.exception;
 
 public class RelationshipNotFoundException extends RuntimeException{
-
-    public RelationshipNotFoundException() {
-        super();
-    }
-
     public RelationshipNotFoundException(String message) {
         super(message);
     }

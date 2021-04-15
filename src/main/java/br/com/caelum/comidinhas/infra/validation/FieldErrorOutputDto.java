@@ -1,11 +1,9 @@
-package br.com.caelum.comidinhas.handler.validation;
+package br.com.caelum.comidinhas.infra.validation;
 
-public class FieldErrorOutputDto {
+class FieldErrorOutputDto {
 
-    private String field;
-    private String message;
-
-    FieldErrorOutputDto() { }
+    private final String field;
+    private final String message;
 
     public FieldErrorOutputDto(String field, String message) {
         this.field = field;

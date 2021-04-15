@@ -10,13 +10,4 @@ spring:
     hibernate:
       ddl-auto: validate
 
----
-spring:
-  profiles: test
-  datasource:
-    url: jdbc:postgresql://localhost:15432/comidinhas_test?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+

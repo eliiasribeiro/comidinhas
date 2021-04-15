@@ -1,17 +1,17 @@
-package br.com.caelum.comidinhas.handler.validation;
+package br.com.caelum.comidinhas.infra.validation;
 
 import java.util.*;
 
-public class ValidationErrorsOutputDto {
+class ValidationErrorsOutputDto {
 
-    private List<String> globalErrorMessages = new ArrayList<>();
-    private List<FieldErrorOutputDto> fieldErrors = new ArrayList<>();
+    private final List<String> globalErrorMessages = new ArrayList<>();
+    private final List<FieldErrorOutputDto> fieldErrors = new ArrayList<>();
 
-    public void addError(String message) {
+    void addError(String message) {
         globalErrorMessages.add(message);
     }
 
-    public void addFieldError(String field, String message) {
+    void addFieldError(String field, String message) {
         FieldErrorOutputDto fieldError = new FieldErrorOutputDto(field, message);
         fieldErrors.add(fieldError);
     }

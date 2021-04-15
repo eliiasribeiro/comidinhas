@@ -1,24 +1,27 @@
-package br.com.caelum.comidinhas.handler.validation;
+package br.com.caelum.comidinhas.infra.validation;
 
-import br.com.caelum.comidinhas.exception.RelationshipNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import br.com.caelum.comidinhas.infra.exception.RelationshipNotFoundException;
 
 import java.util.List;
 
 @RestControllerAdvice
-public class ValidationErrorHandler {
-    @Autowired
-    private MessageSource messageSource;
+class ValidationErrorHandler {
+
+    private final MessageSource messageSource;
+
+    ValidationErrorHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ValidationErrorsOutputDto handleValidationErrorArgumentNotValid(MethodArgumentNotValidException exception) {
+    ValidationErrorsOutputDto handleValidationErrorArgumentNotValid(MethodArgumentNotValidException exception) {
 
         List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
@@ -37,7 +40,7 @@ public class ValidationErrorHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RelationshipNotFoundException.class)
-    public ValidationErrorsOutputDto handleValidationnErrorIllegalArgument(RelationshipNotFoundException exception) {
+    ValidationErrorsOutputDto handleValidationErrorIllegalArgument(RelationshipNotFoundException exception) {
         ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
         validationErrors.addError(exception.getMessage());
         return validationErrors;

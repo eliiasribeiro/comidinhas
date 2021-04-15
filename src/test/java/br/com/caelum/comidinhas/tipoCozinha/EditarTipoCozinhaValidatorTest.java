@@ -13,7 +13,7 @@ class EditarTipoCozinhaValidatorTest {
     private EditarTipoCozinhaValidator editarTipoCozinhaValidator;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         this.tipoCozinhaRepository = mock(TipoCozinhaRepository.class);
         this.errors = mock(Errors.class);
         this.tipoCozinhaInputEditar = mock(TipoCozinhaInputEditar.class);

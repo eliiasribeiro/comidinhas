@@ -4,7 +4,7 @@ import org.springframework.validation.*;
 
 class EditarTipoCozinhaValidator implements Validator {
 
-    TipoCozinhaRepository tipoCozinhaRepository;
+    private final TipoCozinhaRepository tipoCozinhaRepository;
 
     EditarTipoCozinhaValidator(TipoCozinhaRepository tipoCozinhaRepository) {
         this.tipoCozinhaRepository = tipoCozinhaRepository;
