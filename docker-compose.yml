@@ -8,4 +8,12 @@ services:
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
-      - POSTGRES_DB=comidinha
+      - POSTGRES_DB=comidinhas
+  db-test:
+    image: postgres
+    ports:
+      - 15432:5432
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=comidinhas_test

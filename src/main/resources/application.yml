@@ -1,9 +1,13 @@
 spring:
+  profiles:
+    active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/comidinha?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
+    url: jdbc:postgresql://localhost:5432/comidinhas?useTimezone=true&serverTimezone=America/Sao_Paulo&useSSL=false
     username: root
     password: root
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+
