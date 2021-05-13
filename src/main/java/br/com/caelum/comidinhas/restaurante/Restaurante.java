@@ -38,4 +38,31 @@ class Restaurante {
     public Restaurante() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public TipoCozinha getTipoCozinha() {
+        return tipoCozinha;
+    }
 }
