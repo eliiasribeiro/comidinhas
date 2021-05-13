@@ -35,7 +35,7 @@ class Restaurante {
     private TipoCozinha tipoCozinha;
 
     @Deprecated
-    public Restaurante() {
+    Restaurante() {
     }
 
     public Long getId() {
