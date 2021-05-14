@@ -17,7 +17,7 @@ public class TipoCozinha {
     public TipoCozinha() {
     }
 
-    TipoCozinha(Long id, @NotEmpty @Size(max = 50) String nome) {
+    public TipoCozinha(Long id, @NotEmpty @Size(max = 50) String nome) {
         this.id = id;
         this.nome = nome;
     }

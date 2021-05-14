@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.shuffle;
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 class RestauranteController {
@@ -21,8 +22,9 @@ class RestauranteController {
     @GetMapping("/restaurantes-proximos/{cep}")
     ResponseEntity<List<RestauranteOutput>> buscaRestauranteProximos(@PathVariable("cep") String cep){
         List<Restaurante> todosOsRestaurantes = restauranteRepository.findAll();
+        //Manda isso pra entidade ao inves de mandar pro controller?
         shuffle(todosOsRestaurantes);
         List<RestauranteOutput> restauranteOutputs = todosOsRestaurantes.stream().map(RestauranteOutput::new).limit(5).collect(Collectors.toList());
-        return ResponseEntity.ok(restauranteOutputs);
+        return ok(restauranteOutputs);
     }
 }

@@ -34,8 +34,20 @@ class Restaurante {
     @ManyToOne
     private TipoCozinha tipoCozinha;
 
-    @Deprecated
-    Restaurante() {
+
+
+    Restaurante(Long id, String nome, String cnpj, String endereco, String cep, String descricao, TipoCozinha tipoCozinha) {
+        this.id = id;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.descricao = descricao;
+        this.tipoCozinha = tipoCozinha;
+    }
+
+    public Restaurante() {
+
     }
 
     public Long getId() {
