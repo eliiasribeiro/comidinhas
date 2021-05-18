@@ -31,7 +31,6 @@ class RestauranteControllerTest {
     private MockMvc mockMvc;
 
 
-    //PEDIR AJUDAR PRA ENTENDER COMO FAZ ISSO DE MANEIRA CORRETA
     @Test
     void deve_retornar_uma_lista_com_restaurantes() throws Exception {
         TipoCozinha arabe = new TipoCozinha(1L, "arabe");
@@ -42,8 +41,8 @@ class RestauranteControllerTest {
         Restaurante kebabDoAquiles = new Restaurante(2L,"Kebab do Aquiles","11.418.316/0001-14",
                 "Rua vergueiro","71234000","mange du kebab", arabe);
 
-        when(distanciaService.calculaDistancia(eq(barDoElias), eq("08255-000"))).thenReturn(10);
-        when(distanciaService.calculaDistancia(eq(kebabDoAquiles), eq("08255-000"))).thenReturn(6);
+        when(distanciaService.calculaDistancia(barDoElias, "08255-000")).thenReturn(10);
+        when(distanciaService.calculaDistancia(kebabDoAquiles, "08255-000")).thenReturn(6);
 
         List<Restaurante> restaurantes = Arrays.asList(barDoElias, kebabDoAquiles);
         doReturn(restaurantes).when(restauranteRepository).findAll();
