@@ -17,19 +17,19 @@ class RestauranteOutput {
         this.distancia = random.nextInt(100);
     }
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 
-    String getNome() {
+    public String getNome() {
         return nome;
     }
 
-    String getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    Integer getDistancia() {
+    public Integer getDistancia() {
         return distancia;
     }
 }
