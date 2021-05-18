@@ -18,8 +18,7 @@ class RestauranteController {
         this.restauranteRepository = restauranteRepository;
     }
 
-    //PERGUNTAR SE EU DEVERIA VALIDAR O CEP QUE VEIO PELA URL
-    @GetMapping("/restaurantes-proximos/{cep}")
+    @GetMapping("/restaurantes-proximos/{cep:\\d{5}-\\d{3}}")
     ResponseEntity<List<RestauranteOutput>> buscaRestauranteProximos(@PathVariable("cep") String cep){
         List<Restaurante> todosOsRestaurantes = restauranteRepository.findAll();
         //Manda isso pra entidade ao inves de mandar pro controller?
