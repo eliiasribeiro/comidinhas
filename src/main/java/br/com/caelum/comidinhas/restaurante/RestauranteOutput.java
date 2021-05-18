@@ -9,12 +9,11 @@ class RestauranteOutput {
     private final Integer distancia;
 
 
-    RestauranteOutput(Restaurante restaurante){
-        var random = new Random();
+    RestauranteOutput(Restaurante restaurante, Integer distancia){
         this.id = restaurante.getId();
         this.nome = restaurante.getNome();
         this.descricao = restaurante.getDescricao();
-        this.distancia = random.nextInt(100);
+        this.distancia = distancia;
     }
 
     public Long getId() {
