@@ -1,11 +1,12 @@
 package br.com.caelum.comidinhas.restaurante;
 
-import java.util.Random;
+import javax.validation.constraints.NotNull;
 
 class RestauranteOutput {
     private final Long id;
     private final String nome;
     private final String descricao;
+    @NotNull
     private final Integer distancia;
 
 

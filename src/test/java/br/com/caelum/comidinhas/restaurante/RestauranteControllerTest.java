@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -66,7 +67,11 @@ class RestauranteControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
-    // formato URL inválido => 404
-    // distancia service retornando null
+    @Test
+    void deve_retornar_404_quando_o_cep_esta_em_formato_invalido() throws Exception {
+        doReturn(Collections.EMPTY_LIST).when(restauranteRepository).findAll();
+        mockMvc.perform(get("/restaurantes-proximos/08255000"))
+                .andExpect(status().isNotFound());
+    }
 
 }
