@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class TipoCozinha {
+public class TipoCozinha {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @NotEmpty
@@ -17,7 +17,7 @@ class TipoCozinha {
     public TipoCozinha() {
     }
 
-    TipoCozinha(Long id, @NotEmpty @Size(max = 50) String nome) {
+    public TipoCozinha(Long id, @NotEmpty @Size(max = 50) String nome) {
         this.id = id;
         this.nome = nome;
     }
