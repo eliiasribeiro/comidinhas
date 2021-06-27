@@ -1,6 +1,6 @@
 CREATE TABLE Ingrediente(
     id BIGSERIAL NOT NULL,
-    nome VARCHAR(50) NOT NULL,
+    nome jsonb NOT NULL,
     item_id BIGSERIAL,
     PRIMARY KEY (id),
     UNIQUE (nome),

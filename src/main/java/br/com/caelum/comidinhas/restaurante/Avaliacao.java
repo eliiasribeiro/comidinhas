@@ -4,15 +4,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Cardapio {
+public class Avaliacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String descricao;
+    private Long nota;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cardapio_id")
-    private List<Item> itens;
-    @OneToOne
-    private Restaurante restaurante;
+    @JoinColumn(name = "avaliacao_id")
+    private List<AvaliacaoComentarios> avaliacaoComentarios;
 }
