@@ -9,6 +9,7 @@ public class Cardapio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(columnDefinition = "text")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cardapio_id")

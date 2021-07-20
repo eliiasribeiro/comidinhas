@@ -11,9 +11,6 @@ public class Item {
     private Long id;
     private String nome;
     private BigDecimal preco;
-    @Enumerated(value = EnumType.STRING)
-    private Categoria categoria;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "item_id")
-    private List<Ingrediente> ingrediente;
+    @Column(columnDefinition = "text")
+    private String descricao;
 }

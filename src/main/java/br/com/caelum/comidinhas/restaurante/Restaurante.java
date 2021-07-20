@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -35,7 +36,7 @@ class Restaurante {
     private String descricao;
     @ManyToOne
     private TipoCozinha tipoCozinha;
-    private Long taxaDeEntrega;
+    private BigDecimal taxaDeEntrega;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "restaurante_id")
     private List<Avaliacao> avaliacoes;
