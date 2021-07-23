@@ -30,6 +30,11 @@ class RestauranteController {
         return ok(restauranteOutputs);
     }
 
+    @GetMapping("/restaurantes")
+    ResponseEntity<List<Restaurante>> todosOsRestaurantes(){
+        return ResponseEntity.ok(restauranteRepository.findAll());
+    }
+
     private Function<Restaurante, RestauranteOutput> restauranteOutput(String cep) {
         return restaurante -> new RestauranteOutput(restaurante, distanciaService.calculaDistancia(restaurante, cep));
     }

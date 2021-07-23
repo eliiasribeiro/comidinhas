@@ -8,6 +8,7 @@ class RestauranteOutput {
     private final String descricao;
     @NotNull
     private final Integer distancia;
+    private final String tipoDeCozinhaNome;
 
 
     RestauranteOutput(Restaurante restaurante, Integer distancia){
@@ -15,6 +16,11 @@ class RestauranteOutput {
         this.nome = restaurante.getNome();
         this.descricao = restaurante.getDescricao();
         this.distancia = distancia;
+        this.tipoDeCozinhaNome = restaurante.getTipoCozinhaNome();
+    }
+
+    public String getTipoDeCozinhaNome() {
+        return tipoDeCozinhaNome;
     }
 
     public Long getId() {

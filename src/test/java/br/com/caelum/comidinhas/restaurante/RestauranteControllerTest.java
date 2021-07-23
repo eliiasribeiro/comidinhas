@@ -53,6 +53,7 @@ class RestauranteControllerTest {
                 .andExpect(jsonPath("$.length()", is(2)))
                 .andExpect(jsonPath("$[*].nome", containsInAnyOrder("Bar do elias", "Kebab do Aquiles")))
                 .andExpect(jsonPath("$[*].id", containsInAnyOrder(1, 2)))
+                .andExpect(jsonPath("$[*].tipoDeCozinhaNome", containsInAnyOrder("arabe","arabe")))
                 .andExpect(jsonPath("$[*].descricao", containsInAnyOrder("piriripopopo", "mange du kebab")))
                 .andExpect(jsonPath("$[*].distancia", containsInAnyOrder(10, 6)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));

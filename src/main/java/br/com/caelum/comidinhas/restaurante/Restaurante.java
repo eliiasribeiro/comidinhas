@@ -84,4 +84,8 @@ class Restaurante {
     public TipoCozinha getTipoCozinha() {
         return tipoCozinha;
     }
+
+    public String getTipoCozinhaNome(){
+        return tipoCozinha.getNome();
+    }
 }
