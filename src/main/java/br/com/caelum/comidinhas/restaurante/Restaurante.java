@@ -37,6 +37,7 @@ class Restaurante {
     @ManyToOne
     private TipoCozinha tipoCozinha;
     private BigDecimal taxaDeEntrega;
+    private String logo;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "restaurante_id")
     private List<Avaliacao> avaliacoes;
@@ -65,18 +66,6 @@ class Restaurante {
         return nome;
     }
 
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -87,5 +76,9 @@ class Restaurante {
 
     public String getTipoCozinhaNome(){
         return tipoCozinha.getNome();
+    }
+
+    public String getLogo() {
+        return logo;
     }
 }

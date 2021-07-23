@@ -1,7 +1,9 @@
 package br.com.caelum.comidinhas.restaurante;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.function.Function;
@@ -31,8 +33,18 @@ class RestauranteController {
     }
 
     @GetMapping("/restaurantes")
-    ResponseEntity<List<Restaurante>> todosOsRestaurantes(){
-        return ResponseEntity.ok(restauranteRepository.findAll());
+    ResponseEntity<List<RestauranteOutput>> todosOsRestaurantes(){
+        List<RestauranteOutput> collect = restauranteRepository.findAll()
+                .stream()
+                .map(restaurante -> new RestauranteOutput(restaurante, 6))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(collect);
+    }
+
+    @GetMapping("/restaurante/{id}")
+    ResponseEntity<RestauranteOutput> umRestaurante(@PathVariable Long id){
+        Restaurante restaurante = restauranteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok(new RestauranteOutput(restaurante,5));
     }
 
     private Function<Restaurante, RestauranteOutput> restauranteOutput(String cep) {

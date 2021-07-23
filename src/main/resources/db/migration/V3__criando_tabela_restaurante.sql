@@ -6,6 +6,7 @@ CREATE TABLE Restaurante(
     cep  VARCHAR(9) NOT NULL,
     descricao TEXT,
     tipo_cozinha_id BIGSERIAL NOT NULL,
+    logo VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (nome,cnpj),
     CONSTRAINT FK_Restaurante_TipoCozinha FOREIGN KEY (tipo_cozinha_id) REFERENCES Tipo_Cozinha(id)
