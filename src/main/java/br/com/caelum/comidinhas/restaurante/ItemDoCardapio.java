@@ -2,7 +2,6 @@ package br.com.caelum.comidinhas.restaurante;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "Item_Cardapio")

@@ -1,14 +1,14 @@
 package br.com.caelum.comidinhas.restaurante;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
 
 public class RestauranteComCardapioDTO implements Serializable {
 
     private final Long idRestaurante;
     private final String nomeRestaurante;
     private final String slugRestaurante;
-    private final String tipoDeCozinhaNome;
+    private final String tipoCozinhaNome;
     private final String logo;
     private final String descricao;
     private final List<ItemDoCardapioMenu> itemDoCardapioMenu;
@@ -17,7 +17,7 @@ public class RestauranteComCardapioDTO implements Serializable {
         this.idRestaurante = restauranteCardapioOutput.getId();
         this.nomeRestaurante = restauranteCardapioOutput.getNome();
         this.slugRestaurante = restauranteCardapioOutput.getSlug();
-        this.tipoDeCozinhaNome = restauranteCardapioOutput.getTipoDeCozinhaNome();
+        this.tipoCozinhaNome = restauranteCardapioOutput.getTipoCozinha().getNome();
         this.logo = restauranteCardapioOutput.getLogo();
         this.descricao = restauranteCardapioOutput.getDescricao();
         this.itemDoCardapioMenu = itemDoCardapioMenu;
@@ -35,8 +35,8 @@ public class RestauranteComCardapioDTO implements Serializable {
         return slugRestaurante;
     }
 
-    public String getTipoDeCozinhaNome() {
-        return tipoDeCozinhaNome;
+    public String getTipoCozinhaNome() {
+        return tipoCozinhaNome;
     }
 
     public String getLogo() {

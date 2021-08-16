@@ -9,7 +9,7 @@ class DistanciaService {
 
     private final Random random = new Random();
 
-    Integer calculaDistancia(Restaurante restaurante, String cep) {
+    Integer calculaDistancia() {
         return random.nextInt(100);
     }
 

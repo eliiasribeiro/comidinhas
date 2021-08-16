@@ -27,7 +27,7 @@ class RestauranteController {
     ResponseEntity<List<RestauranteMenuOutput>> buscaRestauranteProximos(@PathVariable("cep") String cep){
         List<Restaurante> todosOsRestaurantes = restauranteRepository.findAll();
         shuffle(todosOsRestaurantes);
-        List<RestauranteMenuOutput> restauranteMenuOutputs = todosOsRestaurantes.stream().map(restauranteOutput(cep)).limit(5)
+        List<RestauranteMenuOutput> restauranteMenuOutputs = todosOsRestaurantes.stream().map(restauranteOutput()).limit(5)
                 .collect(Collectors.toList());
         return ok(restauranteMenuOutputs);
     }
@@ -42,19 +42,19 @@ class RestauranteController {
     }
 
     @GetMapping("/restaurante/{slug}")
-    ResponseEntity<?> umRestaurante(@PathVariable("slug")String slug){
-        Optional<RestauranteCardapioOutput> possivelRestauranteCardapioOutput = restauranteRepository.getBySlug(slug);
+    ResponseEntity<RestauranteComCardapioDTO> umRestaurante(@PathVariable("slug")String slug){
+        Optional<RestauranteCardapioOutput> possivelRestauranteCardapioOutput = restauranteRepository.findBySlug(slug);
         List<ItemDoCardapioMenu> itensDoCardapio = itemDoCardapioRepository.getByRestaurante(slug);
         if(possivelRestauranteCardapioOutput.isPresent()){
             RestauranteComCardapioDTO restauranteComCardapioDTO = new RestauranteComCardapioDTO(possivelRestauranteCardapioOutput.get(), itensDoCardapio);
             return ResponseEntity.ok(restauranteComCardapioDTO);
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 
 
-    private Function<Restaurante, RestauranteMenuOutput> restauranteOutput(String cep) {
-        return restaurante -> new RestauranteMenuOutput(restaurante, distanciaService.calculaDistancia(restaurante, cep));
+    private Function<Restaurante, RestauranteMenuOutput> restauranteOutput() {
+        return restaurante -> new RestauranteMenuOutput(restaurante, distanciaService.calculaDistancia());
     }
 
 }

@@ -5,8 +5,12 @@ interface RestauranteCardapioOutput {
  Long getId();
  String getNome();
  String getSlug();
- String getTipoDeCozinhaNome();
+ TipoCozinha getTipoCozinha();
  String getLogo();
  String getDescricao();
 
+
+ interface TipoCozinha {
+  String getNome();
+ }
 }

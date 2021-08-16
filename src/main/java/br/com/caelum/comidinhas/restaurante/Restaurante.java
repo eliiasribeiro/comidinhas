@@ -5,12 +5,10 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import static java.time.LocalDateTime.*;
+import static java.time.LocalDateTime.now;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
