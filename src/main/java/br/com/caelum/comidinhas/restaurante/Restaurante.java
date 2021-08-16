@@ -7,12 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.time.LocalDateTime.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 class Restaurante {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -38,9 +41,8 @@ class Restaurante {
     private TipoCozinha tipoCozinha;
     private BigDecimal taxaDeEntrega;
     private String logo;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "restaurante_id")
-    private List<Avaliacao> avaliacoes;
+    private String slug;
+    private LocalDateTime createdAt = now();
 
 
 
@@ -80,5 +82,9 @@ class Restaurante {
 
     public String getLogo() {
         return logo;
+    }
+
+    public String getSlug() {
+        return slug;
     }
 }

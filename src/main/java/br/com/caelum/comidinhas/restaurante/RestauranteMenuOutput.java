@@ -5,22 +5,22 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-class RestauranteOutput {
+class RestauranteMenuOutput {
+
     private final Long id;
     private final String nome;
+    private final String slug;
     @NotNull
     private final Integer distancia;
     private final String tipoDeCozinhaNome;
     private final String logo;
-    private final String descricao;
 
-
-    RestauranteOutput(Restaurante restaurante, Integer distancia){
+    RestauranteMenuOutput(Restaurante restaurante, Integer distancia){
         this.id = restaurante.getId();
         this.nome = restaurante.getNome();
+        this.slug = restaurante.getSlug();
         this.distancia = distancia;
         this.tipoDeCozinhaNome = restaurante.getTipoCozinhaNome();
-        this.descricao = restaurante.getDescricao();
         this.logo = restaurante.getLogo();
     }
 
@@ -40,11 +40,11 @@ class RestauranteOutput {
         return distancia;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
     public String getLogo() {
         return logo;
+    }
+
+    public String getSlug() {
+        return slug;
     }
 }

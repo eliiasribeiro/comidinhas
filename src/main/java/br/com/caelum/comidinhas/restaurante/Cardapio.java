@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity
 public class Cardapio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,7 +14,27 @@ public class Cardapio {
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cardapio_id")
-    private List<Item> itens;
+    private List<ItemDoCardapio> itens;
     @OneToOne
     private Restaurante restaurante;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public List<ItemDoCardapio> getItens() {
+        return itens;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
 }
