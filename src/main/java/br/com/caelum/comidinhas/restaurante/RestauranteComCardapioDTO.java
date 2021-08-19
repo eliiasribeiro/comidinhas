@@ -3,7 +3,7 @@ package br.com.caelum.comidinhas.restaurante;
 import java.io.Serializable;
 import java.util.List;
 
-public class RestauranteComCardapioDTO implements Serializable {
+class RestauranteComCardapioDTO implements Serializable {
 
     private final Long idRestaurante;
     private final String nomeRestaurante;

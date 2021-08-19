@@ -25,6 +25,9 @@ class RestauranteControllerTest {
     @MockBean
     private DistanciaService distanciaService;
 
+    @MockBean
+    private ItemDoCardapioRepository itemDoCardapioRepository;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -72,4 +75,9 @@ class RestauranteControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void deve_retornar_404_quando_nao_tem_um_restaurante_com_slug() throws Exception{
+        mockMvc.perform(get("/restaurante/italiano"))
+                .andExpect(status().isNotFound());
+    }
 }

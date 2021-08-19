@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Cardapio {
+class Cardapio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Cardapio {
     @OneToOne
     private Restaurante restaurante;
 
-    public Cardapio(String nome, String descricao, Restaurante restaurante) {
+    Cardapio(String nome, String descricao, Restaurante restaurante) {
         this.nome = nome;
         this.descricao = descricao;
         this.restaurante = restaurante;
