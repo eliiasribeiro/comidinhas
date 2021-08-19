@@ -2,7 +2,6 @@ package br.com.caelum.comidinhas.restaurante;
 
 
 import br.com.caelum.comidinhas.tipoCozinha.TipoCozinha;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,8 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -27,6 +24,9 @@ class RestauranteControllerTest {
 
     @MockBean
     private DistanciaService distanciaService;
+
+    @MockBean
+    private ItemDoCardapioRepository itemDoCardapioRepository;
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,8 +42,8 @@ class RestauranteControllerTest {
         Restaurante kebabDoAquiles = new Restaurante(2L,"Kebab do Aquiles","11.418.316/0001-14",
                 "Rua vergueiro","71234000","mange du kebab", arabe);
 
-        when(distanciaService.calculaDistancia(barDoElias, "08255-000")).thenReturn(10);
-        when(distanciaService.calculaDistancia(kebabDoAquiles, "08255-000")).thenReturn(6);
+        when(distanciaService.calculaDistancia()).thenReturn(10);
+        when(distanciaService.calculaDistancia()).thenReturn(6);
 
         List<Restaurante> restaurantes = Arrays.asList(barDoElias, kebabDoAquiles);
         doReturn(restaurantes).when(restauranteRepository).findAll();
@@ -53,6 +53,7 @@ class RestauranteControllerTest {
                 .andExpect(jsonPath("$.length()", is(2)))
                 .andExpect(jsonPath("$[*].nome", containsInAnyOrder("Bar do elias", "Kebab do Aquiles")))
                 .andExpect(jsonPath("$[*].id", containsInAnyOrder(1, 2)))
+                .andExpect(jsonPath("$[*].tipoDeCozinhaNome", containsInAnyOrder("arabe","arabe")))
                 .andExpect(jsonPath("$[*].descricao", containsInAnyOrder("piriripopopo", "mange du kebab")))
                 .andExpect(jsonPath("$[*].distancia", containsInAnyOrder(10, 6)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -74,4 +75,9 @@ class RestauranteControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void deve_retornar_404_quando_nao_tem_um_restaurante_com_slug() throws Exception{
+        mockMvc.perform(get("/restaurante/italiano"))
+                .andExpect(status().isNotFound());
+    }
 }

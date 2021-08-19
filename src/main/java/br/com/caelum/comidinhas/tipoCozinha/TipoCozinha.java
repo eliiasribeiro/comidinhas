@@ -22,7 +22,7 @@ public class TipoCozinha {
         this.nome = nome;
     }
 
-    TipoCozinha(String nome) {
+    public TipoCozinha(String nome) {
         this.nome = nome;
     }
 

@@ -15,22 +15,37 @@ class RestauranteController {
 
     private final RestauranteRepository restauranteRepository;
     private final DistanciaService distanciaService;
+    private final ItemDoCardapioRepository itemDoCardapioRepository;
 
-    RestauranteController(RestauranteRepository restauranteRepository, DistanciaService distanciaService) {
+    RestauranteController(RestauranteRepository restauranteRepository, DistanciaService distanciaService, ItemDoCardapioRepository itemDoCardapioRepository) {
         this.restauranteRepository = restauranteRepository;
         this.distanciaService = distanciaService;
+        this.itemDoCardapioRepository = itemDoCardapioRepository;
     }
 
     @GetMapping("/restaurantes-proximos/{cep:\\d{5}-\\d{3}}")
-    ResponseEntity<List<RestauranteOutput>> buscaRestauranteProximos(@PathVariable("cep") String cep){
+    ResponseEntity<List<RestauranteMenuOutput>> buscaRestauranteProximos(@PathVariable("cep") String cep){
         List<Restaurante> todosOsRestaurantes = restauranteRepository.findAll();
         shuffle(todosOsRestaurantes);
-        List<RestauranteOutput> restauranteOutputs = todosOsRestaurantes.stream().map(restauranteOutput(cep)).limit(5)
+        List<RestauranteMenuOutput> restauranteMenuOutputs = todosOsRestaurantes.stream().map(restauranteOutput()).limit(5)
                 .collect(Collectors.toList());
-        return ok(restauranteOutputs);
+        return ok(restauranteMenuOutputs);
     }
 
-    private Function<Restaurante, RestauranteOutput> restauranteOutput(String cep) {
-        return restaurante -> new RestauranteOutput(restaurante, distanciaService.calculaDistancia(restaurante, cep));
+    @GetMapping("/restaurante/{slug}")
+    ResponseEntity<RestauranteComCardapioDTO> umRestaurante(@PathVariable("slug")String slug){
+        Optional<RestauranteCardapioOutput> possivelRestauranteCardapioOutput = restauranteRepository.findBySlug(slug);
+        List<ItemDoCardapioMenu> itensDoCardapio = itemDoCardapioRepository.findByCardapio_Restaurante_Slug(slug);
+        if(possivelRestauranteCardapioOutput.isPresent()){
+            RestauranteComCardapioDTO restauranteComCardapioDTO = new RestauranteComCardapioDTO(possivelRestauranteCardapioOutput.get(), itensDoCardapio);
+            return ResponseEntity.ok(restauranteComCardapioDTO);
+        }
+        return ResponseEntity.notFound().build();
     }
+
+
+    private Function<Restaurante, RestauranteMenuOutput> restauranteOutput() {
+        return restaurante -> new RestauranteMenuOutput(restaurante, distanciaService.calculaDistancia());
+    }
+
 }

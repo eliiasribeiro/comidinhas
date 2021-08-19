@@ -9,18 +9,15 @@ import java.util.function.Function;
 
 import static java.lang.String.format;
 
-
 class TipoCozinhaInputEditar {
 
     @NotNull(message = "{tipo.cozinha.id.not.null}")
-    private Long id;
+    private final Long id;
 
     @NotEmpty
     @Size(max = 50,message = "{tipo.cozinha.nome.size}")
-    private String nome;
+    private final String nome;
 
-    @Deprecated
-    TipoCozinhaInputEditar(){}
 
     TipoCozinhaInputEditar(@NotNull(message = "{tipo.cozinha.id.not.null}") Long id, @NotEmpty @Size(max = 50, message = "{tipo.cozinha.nome.size}") String nome) {
         this.id = id;
