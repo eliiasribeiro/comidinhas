@@ -12,11 +12,20 @@ public class Cardapio {
     private String nome;
     @Column(columnDefinition = "text")
     private String descricao;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cardapio_id")
+    @OneToMany(mappedBy="cardapio",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemDoCardapio> itens;
     @OneToOne
     private Restaurante restaurante;
+
+    public Cardapio(String nome, String descricao, Restaurante restaurante) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.restaurante = restaurante;
+    }
+
+    @Deprecated
+    public Cardapio() {
+    }
 
     public Long getId() {
         return id;

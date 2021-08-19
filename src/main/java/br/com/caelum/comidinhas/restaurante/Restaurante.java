@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class Restaurante {
+public class Restaurante {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -32,17 +32,16 @@ class Restaurante {
     @Size(max = 8)
     @NotNull
     private String cep;
-    @Size(max = 255)
-    @NotNull
     private String descricao;
     @ManyToOne
     private TipoCozinha tipoCozinha;
     private BigDecimal taxaDeEntrega;
+    @NotNull
     private String logo;
+    @NotNull
     private String slug;
+    @NotNull
     private LocalDateTime createdAt = now();
-
-
 
     Restaurante(Long id, String nome, String cnpj, String endereco, String cep, String descricao, TipoCozinha tipoCozinha) {
         this.id = id;
@@ -51,6 +50,17 @@ class Restaurante {
         this.endereco = endereco;
         this.cep = cep;
         this.descricao = descricao;
+        this.tipoCozinha = tipoCozinha;
+    }
+
+    public Restaurante(String nome, String cnpj, String endereco, String cep, String logo, String slug, LocalDateTime createdAt, TipoCozinha tipoCozinha) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.logo = logo;
+        this.slug = slug;
+        this.createdAt = createdAt;
         this.tipoCozinha = tipoCozinha;
     }
 

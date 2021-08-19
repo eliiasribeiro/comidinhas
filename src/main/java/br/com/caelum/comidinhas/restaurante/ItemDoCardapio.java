@@ -15,6 +15,21 @@ public class ItemDoCardapio {
     @Column(columnDefinition = "text")
     private String descricao;
     private String logo;
+    @ManyToOne
+    @JoinColumn(name = "cardapio_id")
+    private Cardapio cardapio;
+
+    @Deprecated
+    public ItemDoCardapio() {
+    }
+
+    public ItemDoCardapio(String nome, BigDecimal preco, String descricao, String logo, Cardapio cardapio) {
+        this.nome = nome;
+        this.preco = preco;
+        this.descricao = descricao;
+        this.logo = logo;
+        this.cardapio = cardapio;
+    }
 
     public Long getId() {
         return id;
@@ -36,19 +51,3 @@ public class ItemDoCardapio {
         return logo;
     }
 }
-////Todo o item do pedido faz referencia ao do cardapio
-//Pedido
-//
-//        List<ItemDoPedido> itemsPedidos;
-//
-//
-//ItemPedido
-//
-//        ItemCardapio itemCardapio
-//        BigDecimal preco;
-//        Integer quantidade;
-//        String observacao;
-//
-//|ItemCardapioPedido|
-//id id_item preco_item pedido_id
-//1   1          2.59     1

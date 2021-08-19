@@ -32,19 +32,10 @@ class RestauranteController {
         return ok(restauranteMenuOutputs);
     }
 
-    @GetMapping("/restaurantes")
-    ResponseEntity<List<RestauranteMenuOutput>> todosOsRestaurantes(){
-        List<RestauranteMenuOutput> collect = restauranteRepository.findAll()
-                .stream()
-                .map(restaurante -> new RestauranteMenuOutput(restaurante, 6))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(collect);
-    }
-
     @GetMapping("/restaurante/{slug}")
     ResponseEntity<RestauranteComCardapioDTO> umRestaurante(@PathVariable("slug")String slug){
         Optional<RestauranteCardapioOutput> possivelRestauranteCardapioOutput = restauranteRepository.findBySlug(slug);
-        List<ItemDoCardapioMenu> itensDoCardapio = itemDoCardapioRepository.getByRestaurante(slug);
+        List<ItemDoCardapioMenu> itensDoCardapio = itemDoCardapioRepository.findByCardapio_Restaurante_Slug(slug);
         if(possivelRestauranteCardapioOutput.isPresent()){
             RestauranteComCardapioDTO restauranteComCardapioDTO = new RestauranteComCardapioDTO(possivelRestauranteCardapioOutput.get(), itensDoCardapio);
             return ResponseEntity.ok(restauranteComCardapioDTO);
